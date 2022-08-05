@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'form';
+
+  constructor(private fb: FormBuilder) {}
+
+  form = this.fb.group({
+    password: ['', {
+      validators: [
+        Validators.minLength(4),
+        Validators.maxLength(8)
+      ]
+    }]
+
+  });
+
+  get password() {
+    return this.form.controls['password'];
+  }
+
 }
